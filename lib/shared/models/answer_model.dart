@@ -1,19 +1,19 @@
 import 'dart:convert';
 
-class AwnserModel {
+class AnswerModel {
   final String title;
   final bool isRight;
 
-  AwnserModel({
+  AnswerModel({
     required this.title, 
     this.isRight = false
   });
 
-  AwnserModel copyWith({
+  AnswerModel copyWith({
     String? title,
     bool? isRight,
   }) {
-    return AwnserModel(
+    return AnswerModel(
       title: title ?? this.title,
       isRight: isRight ?? this.isRight,
     );
@@ -26,8 +26,8 @@ class AwnserModel {
     };
   }
 
-  factory AwnserModel.fromMap(Map<String, dynamic> map) {
-    return AwnserModel(
+  factory AnswerModel.fromMap(Map<String, dynamic> map) {
+    return AnswerModel(
       title: map['title'],
       isRight: map['isRight'] ?? false,
     );
@@ -35,16 +35,16 @@ class AwnserModel {
 
   String toJson() => json.encode(toMap());
 
-  factory AwnserModel.fromJson(String source) => AwnserModel.fromMap(json.decode(source));
+  factory AnswerModel.fromJson(String source) => AnswerModel.fromMap(json.decode(source));
 
   @override
-  String toString() => 'AwnserModel(title: $title, isRight: $isRight)';
+  String toString() => 'AnswerModel(title: $title, isRight: $isRight)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
   
-    return other is AwnserModel &&
+    return other is AnswerModel &&
       other.title == title &&
       other.isRight == isRight;
   }

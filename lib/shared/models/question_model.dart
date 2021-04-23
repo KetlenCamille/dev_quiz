@@ -2,38 +2,38 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:dev_quiz/shared/models/awnser_model.dart';
+import 'package:dev_quiz/shared/models/answer_model.dart';
 
 class QuestionModel {
   final String title;
-  final List<AwnserModel> awnsers;
+  final List<AnswerModel> answers;
 
   QuestionModel({
     required this.title,
-    required this.awnsers
-  }) : assert(awnsers.length == 4);
+    required this.answers
+  }) : assert(answers.length == 4);
 
   QuestionModel copyWith({
     String? title,
-    List<AwnserModel>? awnsers,
+    List<AnswerModel>? answers,
   }) {
     return QuestionModel(
       title: title ?? this.title,
-      awnsers: awnsers ?? this.awnsers,
+      answers: answers ?? this.answers,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'title': title,
-      'awnsers': awnsers.map((x) => x.toMap()).toList(),
+      'answers': answers.map((x) => x.toMap()).toList(),
     };
   }
 
   factory QuestionModel.fromMap(Map<String, dynamic> map) {
     return QuestionModel(
       title: map['title'],
-      awnsers: List<AwnserModel>.from(map['awnsers']?.map((x) => AwnserModel.fromMap(x))),
+      answers: List<AnswerModel>.from(map['answers']?.map((x) => AnswerModel.fromMap(x))),
     );
   }
 
@@ -42,7 +42,7 @@ class QuestionModel {
   factory QuestionModel.fromJson(String source) => QuestionModel.fromMap(json.decode(source));
 
   @override
-  String toString() => 'QuestionModel(title: $title, awnsers: $awnsers)';
+  String toString() => 'QuestionModel(title: $title, awnsers: $answers)';
 
   @override
   bool operator ==(Object other) {
@@ -50,9 +50,9 @@ class QuestionModel {
   
     return other is QuestionModel &&
       other.title == title &&
-      listEquals(other.awnsers, awnsers);
+      listEquals(other.answers, answers);
   }
 
   @override
-  int get hashCode => title.hashCode ^ awnsers.hashCode;
+  int get hashCode => title.hashCode ^ answers.hashCode;
 }
