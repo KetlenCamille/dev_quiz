@@ -20,13 +20,18 @@ class _ChallengePageState extends State<ChallengePage> {
 
   @override
   void initState(){
-    controller.currentPageNotifier.addListener((){
-      setState((){});
-    });
     pageController.addListener((){
-      controller.currentPage = pageController.page!.toInt();
+      controller.currentPage = pageController.page!.toInt() + 1;
     });
     super.initState();
+  }
+
+  void nextPage(){
+    if(controller.currentPage < widget.questions.length)
+      pageController.nextPage(
+        duration: Duration(milliseconds: 100),
+        curve: Curves.linear
+      );
   }
 
   @override
@@ -39,35 +44,55 @@ class _ChallengePageState extends State<ChallengePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BackButton(),
-              QuestionIndicatorWidget(
-                currentPage : controller.currentPage,
-                length: widget.questions.length,
+              ValueListenableBuilder<int>(
+                valueListenable: controller.currentPageNotifier, 
+                builder: (context, value, _) => QuestionIndicatorWidget (
+                  currentPage : value,
+                  length: widget.questions.length,
+                )
               ),
             ],
           )
         ),
       ),
       body: PageView(
+        physics: NeverScrollableScrollPhysics(),
         controller: pageController,
-        children: widget.questions.map((e) => QuizWidget(question: e)).toList(),
+        children: widget.questions
+          .map(
+            (e) => QuizWidget(
+              question: e,
+              onChange: nextPage
+            )
+          ).toList(),
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Expanded(
-                child: NextButtonWidget.white(label: "Easy", onTap: (){})
-              ),
-              SizedBox(width: 7),
-              Expanded(
-                child: NextButtonWidget.green(label: "Confirm", onTap: (){})
-              ),
-            ],
+          child: ValueListenableBuilder<int>(valueListenable: controller.currentPageNotifier, 
+                builder:(context, value,_) => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  if(value < widget.questions.length)
+                    Expanded(
+                      child: NextButtonWidget.white(
+                        label: "Jump",
+                        onTap: nextPage
+                      )
+                  ),
+                  if(value == widget.questions.length)
+                    Expanded(
+                      child: NextButtonWidget.green(
+                        label: "Confirm", 
+                        onTap: (){
+                          Navigator.pop(context);
+                        })
+                    )
+                ]
+              )
           ),
         ),
-      ),
+      )
     );
   }
 }
