@@ -3,19 +3,23 @@ import 'package:dev_quiz/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
-class ResultPage extends StatelessWidget{
+class ResultPage extends StatelessWidget {
   final String title;
   final int length;
   final int result;
 
-  const ResultPage({Key? key, required this.title, required this.length, required this.result}) : super(key: key);
-
+  const ResultPage(
+      {Key? key,
+      required this.title,
+      required this.length,
+      required this.result})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         width: double.maxFinite,
-        padding: EdgeInsets.only(top:100),
+        padding: EdgeInsets.only(top: 100),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -24,67 +28,65 @@ class ResultPage extends StatelessWidget{
             Column(
               children: [
                 Text(
-                  "Congratulations!",
+                  "Parabéns!",
                   style: AppTextStyles.heading40,
                 ),
-                SizedBox(height: 16),
-                Text.rich(TextSpan(
-                  text:"You concluded ",
-                  style: AppTextStyles.body,
-                  children:[
-                    TextSpan(
-                      text: "\n$title",
-                      style: AppTextStyles.bodyBold,
-                    ),
-                    TextSpan(
-                      text: "\ncom $required de $length acertos",
+                SizedBox(
+                  height: 16,
+                ),
+                Text.rich(
+                  TextSpan(
+                      text: "Você concluiu",
                       style: AppTextStyles.body,
-                    )
-                  ]
-                ), 
-                textAlign: TextAlign.center,),
+                      children: [
+                        TextSpan(
+                          text: "\n$title",
+                          style: AppTextStyles.bodyBold,
+                        ),
+                        TextSpan(
+                          text: "\ncom $result de $length acertos.",
+                          style: AppTextStyles.body,
+                        ),
+                      ]),
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
             Column(
               children: [
-                  Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 68),
-                        child: NextButtonWidget.purple(
-                          label: "Share",
-                          onTap: (){
-                            Share.share('DevQuiz NLW5 - Flutter: Resultado do Quiz $title\nObtive: ${result/length}% de aproveitamento!');
-                          }
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 24,
-                ),
                 Row(
                   children: [
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 68),
-                        child: NextButtonWidget.white(
-                          label: "Back to start",
-                          onTap: (){
+                        child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 68),
+                      child: NextButtonWidget.purple(
+                          label: "Compartilhar",
+                          onTap: () {
+                            Share.share(
+                                'DevQuiz NLW 5 - Flutter: Resultado do Quiz: $title\nObtive: ${result / length}% aproveitamento!');
+                          }),
+                    )),
+                  ],
+                ),
+                SizedBox(height: 24),
+                Row(
+                  children: [
+                    Expanded(
+                        child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 68),
+                      child: NextButtonWidget.white(
+                          label: "Voltar ao início",
+                          onTap: () {
                             Navigator.pop(context);
-                          }
-                        ),
-                      ),
-                    ),
+                          }),
+                    )),
                   ],
                 ),
               ],
             )
           ],
         ),
-      )
+      ),
     );
   }
 }
