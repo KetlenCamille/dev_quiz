@@ -1,23 +1,23 @@
 <b>DevQuiz</b>
 
-✨ Tecnologias<br>
-Esse projeto foi desenvolvido com as seguintes tecnologias:
+✨ Technologies<br>
+This project was developed with these technologies:
 <ul>
   <li>Flutter</li>
   <li>Dart</li>
 </ul>
 <br>
 💻 Projeto<br>
-O devquiz é um jogo de perguntas para avaliar os seus conhecimentos sobre o mundo de desenvolvimento.<br><br>
+The DevQuiz is a quiz game to test your knowledge of the development world.<br><br>
 
 🔖 Layout<br>
-Você pode visualizar o layout do projeto através <a href="https://www.figma.com/file/TI1uGvRx39d1c6avKQySxP/DevQuiz-(Copy)?node-id=0%3A1">link</a>. É necessário ter conta no Figma para acessá-lo.<br>
+You can see the project layout through <a href="https://www.figma.com/file/TI1uGvRx39d1c6avKQySxP/DevQuiz-(Copy)?node-id=0%3A1">link</a>. You must have a Figma account to access it.<br>
 
-🚀 Como executar<br>
-Clone o repositório<br>
-Inicie seu app com flutter run<br>
+🚀 How to run <br>
+Clone the repository<br>
+Start your application with flutter run<br>
 
-📄 Licença <br>
-Esse projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes. <br>
+📄 License <br>
+This project is under the MIT license. See the LICENSE file for more details. <br><br>
 
-Feito com ♥ by Ketlen Rieper
+Developed with ♥ by Ketlen Rieper
